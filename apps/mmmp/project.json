@@ -1,0 +1,81 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mmmp/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/mmmp",
+        "index": "apps/mmmp/src/index.html",
+        "baseHref": "/",
+        "main": "apps/mmmp/src/main.tsx",
+        "polyfills": "apps/mmmp/src/polyfills.ts",
+        "tsConfig": "apps/mmmp/tsconfig.app.json",
+        "assets": ["apps/mmmp/src/favicon.ico", "apps/mmmp/src/assets"],
+        "styles": [],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/mmmp/src/environments/environment.ts",
+              "with": "apps/mmmp/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "mmmp:build",
+        "hmr": true,
+        "proxyConfig": "apps/mmmp/proxy.conf.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "mmmp:build:development"
+        },
+        "production": {
+          "buildTarget": "mmmp:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mmmp/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/mmmp"],
+      "options": {
+        "jestConfig": "apps/mmmp/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
