@@ -4,5 +4,5 @@ jobs:
     - name: lint
       uses: MansaGroup/nrwl-nx-action@v2
       with:
-      targets: lint
-      projects: mmmp
+        targets: lint
+        projects: mmmp
