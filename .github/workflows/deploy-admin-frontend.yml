@@ -1,6 +1,8 @@
 name: deploy-admin-frontend
 on: push
-uses: MansaGroup/nrwl-nx-action@v2
-with:
-  targets: lint
-  projects: mmmp
+jobs:
+  - name: lint
+  uses: MansaGroup/nrwl-nx-action@v2
+  with:
+    targets: lint
+    projects: mmmp
