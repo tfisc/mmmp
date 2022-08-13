@@ -2,7 +2,7 @@ name: deploy-admin-frontend
 on: push
 jobs:
   test:
-    uses: MansaGroup/nrwl-nx-action@v2
-    with:
-      targets: lint
-      projects: mmmp
+      uses: MansaGroup/nrwl-nx-action@v2
+      with:
+        targets: lint
+        projects: mmmp
