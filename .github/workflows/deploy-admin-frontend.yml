@@ -1,5 +1,7 @@
----
-- uses: mansagroup/nrwl-nx-action@v2
-  with:
-    targets: build
-    projects: mmmp
+name: Deploy admin frontend
+jobs:
+  steps:
+    - uses: MansaGroup/nrwl-nx-action@v2
+      with:
+      targets: lint
+      projects: mmmp
