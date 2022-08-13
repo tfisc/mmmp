@@ -8,12 +8,12 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useState } from 'react';
-import { useTopBarStyles } from './useTopBarStyles.hook';
+import { useStyles } from './useStyles.hook';
 
 export const NAVBAR_HEIGHT = 60;
 
 export const TopBar = () => {
-  const { classes, cx } = useTopBarStyles();
+  const { classes, cx } = useStyles();
   const links = [{ label: 'Horaires', link: '/horaires' }];
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0]);

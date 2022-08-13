@@ -1,7 +1,7 @@
 import { createStyles } from '@mantine/core';
 import { NAVBAR_HEIGHT } from './Topbar';
 
-export const useTopBarStyles = createStyles((theme) => ({
+export const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
     zIndex: 1,
