@@ -1,8 +1,8 @@
 name: Deploy admin frontend
 jobs:
-  steps:
+  deploy:
     - name: lint
-    - uses: MansaGroup/nrwl-nx-action@v2
+      uses: MansaGroup/nrwl-nx-action@v2
       with:
       targets: lint
       projects: mmmp
