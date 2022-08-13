@@ -1,4 +1,4 @@
-name: test
+name: 'test'
 - uses: MansaGroup/nrwl-nx-action@v2
   with:
     targets: lint
