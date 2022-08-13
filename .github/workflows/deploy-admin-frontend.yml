@@ -1,5 +1,5 @@
 name: deploy-admin-frontend
 uses: MansaGroup/nrwl-nx-action@v2
-  - with:
-    targets: lint
-    projects: mmmp
+with:
+  targets: lint
+  projects: mmmp
