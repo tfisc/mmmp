@@ -1,4 +1,4 @@
-name: deploy-admin-frontend
+name: test
 - uses: MansaGroup/nrwl-nx-action@v2
   with:
     targets: lint
