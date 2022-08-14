@@ -1,35 +1,53 @@
-import { Button, TextInput } from '@mantine/core';
-import { TimeRangeInput } from '@mantine/dates';
+import { Button, Select, TextInput } from '@mantine/core';
+import { TimeInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
 import { ADD_SHIFT_VALIDATION_SCHEMA } from './helpers';
 import { useStyles } from './useStyles.hook';
 
 export const AddShiftForm = () => {
+  const days = [
+    'Lundi',
+    'Mardi',
+    'Mercredi',
+    'Jeudi',
+    'Vendredi',
+    'Samedi',
+    'Dimanche',
+  ];
+  const selectDays = days.map((day) => ({ value: day, label: day }));
   const { classes } = useStyles();
-  const { getInputProps, errors, onSubmit } = useForm({
+  const { getInputProps, errors, onSubmit, validate } = useForm({
     initialValues: {
-      name: '',
-      time: [],
+      day: 'Lundi',
+      start: undefined,
+      end: undefined,
     },
     validate: zodResolver(ADD_SHIFT_VALIDATION_SCHEMA),
-    validateInputOnChange: true,
   });
 
   return (
     <form onSubmit={onSubmit((values) => console.log(values))}>
-      <TextInput
+      <Select
         className={classes.input}
+        data={selectDays}
         required
-        placeholder="Groupe 1"
-        label="Nom du groupe"
-        {...getInputProps('name')}
+        label="Jour"
+        placeholder="Jour"
+        {...getInputProps('day')}
       />
-      <TimeRangeInput
+      <TimeInput
         className={classes.input}
-        label="Plage horaire"
+        label="Début"
         required
         clearable
-        {...getInputProps('time')}
+        {...getInputProps('start')}
+      />
+      <TimeInput
+        className={classes.input}
+        label="Fin"
+        required
+        clearable
+        {...getInputProps('end')}
       />
       <Button type="submit" disabled={Object.keys(errors).length > 0} fullWidth>
         Valider
