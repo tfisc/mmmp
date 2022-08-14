@@ -24,5 +24,5 @@ jobs:
         with:
           service_account: ${{ secrets.GCP_SA_EMAIL }}
           credentials_json: ${{ secrets.GCP_SA_KEY }}
-      - run: gsutil -m rsync -d -c -r dist/app/mmmp/ gs://mmmp-admin-frontend
+      - run: gsutil -m rsync -d -c -r ./dist/app/mmmp gs://mmmp-admin-frontend
 
