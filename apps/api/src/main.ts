@@ -1,13 +1,14 @@
-import * as express from 'express';
-import { Message } from '@mmmp/api-interfaces';
+import express from 'express';
+import cors from 'cors';
+import shiftsRouter from './app/routes/shifts.route';
+import authRouter from './app/routes/auth.route'
 
 const app = express();
-
-const greeting: Message = { message: 'Welcome to api!' };
-
-app.get('/api', (req, res) => {
-  res.send(greeting);
-});
+const URL_PREFIX = '/api/v1';
+app.use(cors());
+app.use(express.json());
+app.use(`${URL_PREFIX}/shifts`, shiftsRouter);
+app.use(`${URL_PREFIX}/auth`, authRouter);
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {

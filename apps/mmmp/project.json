@@ -11,7 +11,7 @@
         "compiler": "babel",
         "outputPath": "dist/apps/mmmp",
         "index": "apps/mmmp/src/index.html",
-        "baseHref": "/",
+        "baseHref": "/mmmp-admin-frontend/",
         "main": "apps/mmmp/src/main.tsx",
         "polyfills": "apps/mmmp/src/polyfills.ts",
         "tsConfig": "apps/mmmp/tsconfig.app.json",

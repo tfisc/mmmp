@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -15,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@mmmp/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@mmmp/api-interfaces": ["libs/api-interfaces/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

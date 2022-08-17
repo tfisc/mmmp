@@ -1,8 +1,11 @@
-import { Button, Select, TextInput } from '@mantine/core';
+import { Button, Loader, Select } from '@mantine/core';
 import { TimeInput } from '@mantine/dates';
 import { useForm, zodResolver } from '@mantine/form';
+import { postShift } from '../../../../backend/shifts/postShift';
+import { useMutation, useQueryClient } from 'react-query';
 import { ADD_SHIFT_VALIDATION_SCHEMA } from './helpers';
 import { useStyles } from './useStyles.hook';
+import { CreateShiftDTO } from '../../../../../../../../libs/api-interfaces/src/lib/shifts.type';
 
 export const AddShiftForm = () => {
   const days = [
@@ -16,17 +19,26 @@ export const AddShiftForm = () => {
   ];
   const selectDays = days.map((day) => ({ value: day, label: day }));
   const { classes } = useStyles();
-  const { getInputProps, errors, onSubmit, validate } = useForm({
-    initialValues: {
-      day: 'Lundi',
-      start: undefined,
-      end: undefined,
-    },
+  const { getInputProps, errors, onSubmit } = useForm<CreateShiftDTO>({
     validate: zodResolver(ADD_SHIFT_VALIDATION_SCHEMA),
   });
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(postShift, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('shifts');
+    },
+  });
+
+  const submitShift = (values: CreateShiftDTO) =>
+    mutation.mutate({
+      day: values.day,
+      start: values.start.toISOString(),
+      end: values.end.toISOString(),
+    });
 
   return (
-    <form onSubmit={onSubmit((values) => console.log(values))}>
+    <form onSubmit={onSubmit(submitShift)}>
       <Select
         className={classes.input}
         data={selectDays}
@@ -49,8 +61,12 @@ export const AddShiftForm = () => {
         clearable
         {...getInputProps('end')}
       />
-      <Button type="submit" disabled={Object.keys(errors).length > 0} fullWidth>
-        Valider
+      <Button
+        type="submit"
+        disabled={Object.keys(errors).length > 0 || mutation.isLoading}
+        fullWidth
+      >
+        {mutation.isLoading ? <Loader size={'sm'} color="gray" /> : 'Valider'}
       </Button>
     </form>
   );
