@@ -75,7 +75,13 @@
         "jestConfig": "apps/mmmp/jest.config.ts",
         "passWithNoTests": true
       }
-    }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+          "command": "gsutil -m rsync -d -c -r ./dist/apps/mmmp gs://mmmp-admin-frontend"
+      }
+  }
   },
   "tags": []
 }

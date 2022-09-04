@@ -7,7 +7,14 @@ import { getShifts, postShift } from '../services/shift.service';
 
 const router: Router = express.Router();
 
-router.post('/create', createShiftchema, validateRequestSchema, postShift);
+router.post(
+  '/create',
+  createShiftchema,
+  validateRequestSchema,
+  authenticateJWT,
+  validateAdminRole,
+  postShift
+);
 router.get('/', authenticateJWT, validateAdminRole, getShifts);
 
 export default router;
