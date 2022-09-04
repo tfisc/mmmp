@@ -21,8 +21,8 @@ export const ShiftTable = () => {
       <thead>
         <tr>
           <th>Jour</th>
-          <th>Début</th>
-          <th>Fin</th>
+          <th>Heure de début</th>
+          <th>Heure de fin</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
