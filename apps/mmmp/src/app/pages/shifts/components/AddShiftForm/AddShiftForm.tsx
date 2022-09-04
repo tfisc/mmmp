@@ -5,9 +5,11 @@ import { postShift } from '../../../../backend/shifts/postShift';
 import { useMutation, useQueryClient } from 'react-query';
 import { ADD_SHIFT_VALIDATION_SCHEMA } from './helpers';
 import { useStyles } from './useStyles.hook';
-import { CreateShiftDTO } from '../../../../../../../../libs/api-interfaces/src/lib/shifts.type';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { CreateShiftDTO } from 'libs/api-interfaces/src/lib/shifts.type';
+type Props = { toggleModal: (v: boolean) => void };
 
-export const AddShiftForm = () => {
+export const AddShiftForm = ({ toggleModal }: Props) => {
   const days = [
     'Lundi',
     'Mardi',
@@ -24,14 +26,15 @@ export const AddShiftForm = () => {
   });
   const queryClient = useQueryClient();
 
-  const mutation = useMutation(postShift, {
+  const { mutate, isLoading } = useMutation(postShift, {
     onSuccess: () => {
       queryClient.invalidateQueries('shifts');
+      toggleModal(false);
     },
   });
 
   const submitShift = (values: CreateShiftDTO) =>
-    mutation.mutate({
+    mutate({
       day: values.day,
       start: values.start.toISOString(),
       end: values.end.toISOString(),
@@ -63,10 +66,10 @@ export const AddShiftForm = () => {
       />
       <Button
         type="submit"
-        disabled={Object.keys(errors).length > 0 || mutation.isLoading}
+        disabled={Object.keys(errors).length > 0 || isLoading}
         fullWidth
       >
-        {mutation.isLoading ? <Loader size={'sm'} color="gray" /> : 'Valider'}
+        {isLoading ? <Loader size={'sm'} color="gray" /> : 'Valider'}
       </Button>
     </form>
   );

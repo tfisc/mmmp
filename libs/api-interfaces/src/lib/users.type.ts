@@ -1,5 +1,3 @@
-import { Optional } from './utils';
-
 export type User = {
   id: number;
   email: string;
@@ -9,4 +7,6 @@ export type User = {
 
 export type UserWithoutPassword = Omit<User, 'password'>;
 
-export type CreateUserDTO = Optional<User, 'id' & 'role'>;
+export type CreateUserDTO = Omit<User, 'id' | 'role'>;
+
+export type LoginDTO = CreateUserDTO;
